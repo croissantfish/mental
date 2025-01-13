@@ -3,7 +3,7 @@ M.* 语言编译器项目
 
 ## 项目简介
 该项目源自本人在上海交通大学ACM班学习期间的《编译原理》课程设计作业。
-由于《编译原理》课程的教学需要，本人在入职福州大学后使用Maven对原始代码进行适当的重构形成了本项目。
+由于《编译原理》课程的教学需要，本人在入职福州大学后使用 Gradle 对原始代码进行适当的重构形成了本项目。
 
 该项目实现了M.*语言到MIPS32汇编指令的编译器，并使用SPIM模拟器对汇编代码进行解释执行。
 
@@ -20,9 +20,9 @@ M.*语言手册见[[doc/Mx_language_manual.pdf]](doc/Mx_language_manual.pdf)
 请搜索statspim自行编译后将可执行文件放置到`src/test/resources/lib`下对应操作系统的文件夹下
 （Windows系统为win，Linux为linux）。
 
-**温馨提示：由于Lexer、Parser均为Antlr生成，且本项目已通过Maven插件功能实现了在编译时自动生成相关文件的逻辑。
+**温馨提示：由于Lexer、Parser均为Antlr生成，且本项目已通过 Gradle 插件功能实现了在编译时自动生成相关文件的逻辑。
 因此，在没有编译前，IDEA等编辑器可能会提示找不到一些类。
-若要处理这些提示，则可以通过`mvn antlr4:antlr4`命令先行生成文件，并将`target/generated-sources/antlr4/`文件夹标记为生成的源代码根目录或者源代码根目录。**
+若要处理这些提示，则可以通过`gradle :generateGrammarSource`命令先行生成文件。
 
 ## 运行
 
