@@ -5,9 +5,8 @@
  */
 
 plugins {
-    antlr
     `java-library`
-    `maven-publish`
+    antlr
 }
 
 repositories {
@@ -27,20 +26,7 @@ group = "cn.edu.sjtu.songyuke"
 version = "1.0-SNAPSHOT"
 description = "mental"
 java.sourceCompatibility = JavaVersion.VERSION_21
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
-}
-
-tasks.withType<JavaCompile>() {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType<Javadoc>() {
-    options.encoding = "UTF-8"
-}
+java.targetCompatibility = JavaVersion.VERSION_21
 
 tasks.compileJava {
     dependsOn(tasks.generateGrammarSource)
