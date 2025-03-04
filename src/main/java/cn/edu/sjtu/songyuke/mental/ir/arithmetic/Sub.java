@@ -11,6 +11,7 @@ public class Sub extends BinaryArithmetic {
     public Sub() {
         super();
     }
+
     public Sub(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -19,6 +20,7 @@ public class Sub extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "sub");
     }
+
     @Override
     public String toMips() {
         return this.toMips("sub");

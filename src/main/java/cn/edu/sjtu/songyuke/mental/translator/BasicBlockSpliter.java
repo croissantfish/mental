@@ -1,9 +1,9 @@
 package cn.edu.sjtu.songyuke.mental.translator;
 
-import cn.edu.sjtu.songyuke.mental.ir.branch.Branch;
 import cn.edu.sjtu.songyuke.mental.ir.Call;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
 import cn.edu.sjtu.songyuke.mental.ir.SystemCall;
+import cn.edu.sjtu.songyuke.mental.ir.branch.Branch;
 
 import java.util.LinkedList;
 
@@ -12,9 +12,11 @@ import java.util.LinkedList;
  */
 public class BasicBlockSpliter {
     public LinkedList<BasicBlock> basicBlocks;
+
     public BasicBlockSpliter() {
         this.basicBlocks = new LinkedList<>();
     }
+
     public BasicBlockSpliter(Instruction instruction) {
         this.basicBlocks = new LinkedList<>();
         this.basicBlocks.add(new BasicBlock());

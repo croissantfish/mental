@@ -13,10 +13,12 @@ public class CallGetString extends Expression {
     public CallGetString() {
         this.returnType = SymbolTable.MENTAL_M_STRING;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<getString()>:string";
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return "getString()";

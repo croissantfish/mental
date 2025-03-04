@@ -9,11 +9,12 @@ public class BasicBlockTranslator extends MIPSTranslator {
     public BasicBlockTranslator() {
         super();
     }
+
     public void translate(Instruction instruction) {
 //        this.mipsStatement.add("#Basic Block " + this.toString());
         for (; instruction != null; instruction = instruction.nextInstruction) {
             String resultStatement = instruction.toMips(this.machine);
-            if (resultStatement.length() > 0) {
+            if (!resultStatement.isEmpty()) {
                 this.mipsStatement.add(resultStatement);
             }
         }

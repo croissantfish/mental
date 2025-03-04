@@ -1,8 +1,8 @@
 package cn.edu.sjtu.songyuke.mental.ast.expressions;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 
 import java.util.LinkedList;
 
@@ -15,10 +15,12 @@ public class BitShiftExpression extends BinaryExpression {
     public static final int LEFT_SHIFT = MentalParser.LEFT_SHIFT;
     public static final int RIGHT_SHIFT = MentalParser.RIGHT_SHIFT;
     public int op;
+
     public BitShiftExpression() {
         this.op = 0;
         this.returnType = mentalInt;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<bit shift expression";
@@ -32,6 +34,7 @@ public class BitShiftExpression extends BinaryExpression {
         ret += this.rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

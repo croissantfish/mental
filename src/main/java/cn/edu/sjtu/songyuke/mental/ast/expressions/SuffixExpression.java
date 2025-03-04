@@ -1,8 +1,8 @@
 package cn.edu.sjtu.songyuke.mental.ast.expressions;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.symbols.SymbolTable;
 
 import java.util.LinkedList;
@@ -15,11 +15,13 @@ public class SuffixExpression extends Expression {
     public static final int MINUS_MINUS = MentalParser.DEC;
     public Expression childExpression;
     public int op;
+
     public SuffixExpression() {
         this.op = 0;
         this.returnType = SymbolTable.mentalInt;
         this.childExpression = new Expression();
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<suffix expression (";
@@ -30,6 +32,7 @@ public class SuffixExpression extends Expression {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

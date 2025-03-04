@@ -11,6 +11,7 @@ public class Div extends BinaryArithmetic {
     public Div() {
         super();
     }
+
     public Div(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -19,6 +20,7 @@ public class Div extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "div");
     }
+
     @Override
     public String toMips() {
         return this.toMips("div");

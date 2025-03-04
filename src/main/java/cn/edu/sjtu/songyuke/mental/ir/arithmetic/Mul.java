@@ -11,6 +11,7 @@ public class Mul extends BinaryArithmetic {
     public Mul() {
         super();
     }
+
     public Mul(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -19,6 +20,7 @@ public class Mul extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "mul");
     }
+
     @Override
     public String toMips() {
         return this.toMips("mul");

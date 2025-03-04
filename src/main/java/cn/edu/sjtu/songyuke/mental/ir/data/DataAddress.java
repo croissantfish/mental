@@ -5,6 +5,7 @@ package cn.edu.sjtu.songyuke.mental.ir.data;
  */
 public class DataAddress extends Data {
     public DataValue address;
+
     public DataAddress() {
         this.address = null;
         this.registerName = -1;
@@ -12,6 +13,7 @@ public class DataAddress extends Data {
         this.globalDataLabel = null;
         this.globalID = -1;
     }
+
     public DataAddress(DataValue address) {
         this.address = address;
         this.registerName = -1;
@@ -19,6 +21,7 @@ public class DataAddress extends Data {
         this.globalDataLabel = null;
         this.globalID = -1;
     }
+
     public String toAddress() {
         throw new RuntimeException("cannot apply toAddress on a address data.");
     }

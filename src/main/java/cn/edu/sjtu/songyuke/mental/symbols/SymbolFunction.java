@@ -14,18 +14,21 @@ public class SymbolFunction extends SymbolBase {
     public ArrayList<String> parameterName;
     public ArrayList<TypeBase> parameterType;
     public String functionName;
+
     public SymbolFunction() {
         returnType = SymbolTable.mentalUnknownType;
         parameterName = new ArrayList<>();
         parameterType = new ArrayList<>();
         functionName = "";
     }
+
     public SymbolFunction(SymbolFunction other) {
         this.returnType = other.returnType;
         this.parameterName = other.parameterName;
         this.parameterType = other.parameterType;
         this.functionName = other.functionName;
     }
+
     // Constructor a function symbol from a given scope and FunctionDefinitionContext.
     public boolean setFunction(SymbolTable scope, MentalParser.FunctionDefinitionContext funcDefCtx) {
         boolean existError = false;
@@ -40,12 +43,12 @@ public class SymbolFunction extends SymbolBase {
             this.returnType = SymbolTable.mentalVoid;
         } else {
             SymbolBase baseType = scope.getSymbol(funcDefCtx.type().typeName().getText());
-            if (baseType == null || !(baseType instanceof SymbolType)) {
+            if (!(baseType instanceof SymbolType)) {
                 System.err.println("fatal: no such a cn.edu.sjtu.songyuke.mental.type " + funcDefCtx.type().typeName().getText());
                 existError = true;
                 System.exit(1);
             }
-            if (funcDefCtx.type().array().size() != 0) {
+            if (!funcDefCtx.type().array().isEmpty()) {
                 this.returnType = new Array(funcDefCtx.type());
                 if (((Array) this.returnType).arrayType.equals(SymbolTable.mentalUnknownType)) {
                     ((Array) this.returnType).arrayType = ((SymbolType) baseType).type;
@@ -71,12 +74,12 @@ public class SymbolFunction extends SymbolBase {
 
                 // Process the cn.edu.sjtu.songyuke.mental.type of a single variable.
                 SymbolBase baseType = scope.getSymbol(typeCtx.typeName().getText());
-                if (baseType == null || !(baseType instanceof SymbolType)) {
+                if (!(baseType instanceof SymbolType)) {
                     System.err.println("fatal: no such a cn.edu.sjtu.songyuke.mental.type " + typeCtx.typeName().getText());
                     existError = true;
                     System.exit(1);
                 }
-                if (typeCtx.array().size() != 0) {
+                if (!typeCtx.array().isEmpty()) {
                     type = new Array(typeCtx);
                     if (((Array) type).arrayType.equals(SymbolTable.mentalUnknownType)) {
                         ((Array) type).arrayType = ((SymbolType) baseType).type;
@@ -92,18 +95,20 @@ public class SymbolFunction extends SymbolBase {
         }
         return existError;
     }
+
     @Override
     public String toString() {
-        String ret = "<function>" + this.returnType.toString() + " " + this.functionName + '(';
-        if (parameterName.size() > 0) {
+        StringBuilder ret = new StringBuilder("<function>" + this.returnType.toString() + " " + this.functionName + '(');
+        if (!parameterName.isEmpty()) {
             for (int i = 0, count = parameterName.size() - 1; i < count; ++i) {
-                ret += parameterType.get(i).toString() + ',';
+                ret.append(parameterType.get(i).toString()).append(',');
             }
-            ret += parameterType.get(parameterType.size() - 1).toString();
+            ret.append(parameterType.getLast().toString());
         }
-        ret += ')';
-        return ret;
+        ret.append(')');
+        return ret.toString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -113,9 +118,7 @@ public class SymbolFunction extends SymbolBase {
             if (other instanceof SymbolFunction) {
                 if (this.functionName.equals(((SymbolFunction) other).functionName)) {
                     if (this.returnType.equals(((SymbolFunction) other).returnType)) {
-                        if (this.parameterType.equals(((SymbolFunction) other).parameterType)) {
-                            return true;
-                        }
+                        return this.parameterType.equals(((SymbolFunction) other).parameterType);
                     }
                 }
             }

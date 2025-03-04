@@ -11,12 +11,15 @@ public class Add extends BinaryArithmetic {
     public Add() {
         super();
     }
+
     public Add(DataValue lhs, DataValue rhs) {
         super(lhs, rhs);
     }
+
     public Add(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
+
     public Add(DataValue lhs, DataValue rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -25,6 +28,7 @@ public class Add extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "add");
     }
+
     @Override
     public String toMips() {
         return this.toMips("add");

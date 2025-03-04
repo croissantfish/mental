@@ -5,12 +5,13 @@ package cn.edu.sjtu.songyuke.mental.ir.label;
  */
 public class IRLabelElse extends IRLabel {
     public static int nextElseLabel = 0;
+
     public IRLabelElse() {
         this.labelID = nextElseLabel++;
     }
 
     @Override
     public String toString() {
-        return "_else_" + Integer.toString(this.labelID);
+        return "_else_" + this.labelID;
     }
 }

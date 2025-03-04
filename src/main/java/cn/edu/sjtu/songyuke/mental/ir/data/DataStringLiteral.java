@@ -5,12 +5,14 @@ package cn.edu.sjtu.songyuke.mental.ir.data;
  */
 public class DataStringLiteral extends DataAddress {
     public String litertal;
+
     public DataStringLiteral() {
         this.registerName = -1;
         this.litertal = null;
         this.globalDataLabel = null;
         this.stackShift = 2147483647 >> 1;
     }
+
     public DataStringLiteral(String litertal) {
         this.registerName = -1;
         this.litertal = litertal;

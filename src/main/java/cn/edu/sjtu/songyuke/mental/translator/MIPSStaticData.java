@@ -11,16 +11,18 @@ import java.util.LinkedList;
  */
 public class MIPSStaticData {
     public LinkedList<String> mipsStatements;
+
     public MIPSStaticData() {
         this.mipsStatements = new LinkedList<>();
         this.mipsStatements.add("\t.data");
     }
+
     public void translate(Data data) {
         if (data instanceof DataValue) {
-            if (((DataValue) data).globalDataLabel != null) {
+            if (data.globalDataLabel != null) {
 //                mipsStatements.add("\t.data");
 //                mipsStatements.add("\t.align 2");
-                mipsStatements.add(((DataValue) data).globalDataLabel.toString() + ":");
+                mipsStatements.add(data.globalDataLabel.toString() + ":");
                 mipsStatements.add("\t.word 0");
             } else {
                 throw new RuntimeException("not a static variable, cannot put it to static area.");
@@ -45,7 +47,7 @@ public class MIPSStaticData {
                 }
             }
             mipsStatements.add(String.format("\t.word %d", realLength - 2));
-            mipsStatements.add(((DataStringLiteral) data).globalDataLabel.toString() + ":");
+            mipsStatements.add(data.globalDataLabel.toString() + ":");
             mipsStatements.add(String.format("\t.asciiz %s", ((DataStringLiteral) data).litertal));
             mipsStatements.add("\t.align 2");
         }

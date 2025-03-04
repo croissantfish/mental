@@ -14,10 +14,12 @@ import java.util.LinkedList;
 public class Store extends Instruction {
     public DataValue src;
     public Data dest;
+
     public Store() {
         this.src = null;
         this.dest = null;
     }
+
     public Store(DataValue src, Data dest) {
         this.src = src;
         this.src.refCount++;
@@ -34,7 +36,7 @@ public class Store extends Instruction {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         this.src.refCount--;
         if (!(this.src instanceof DataIntLiteral) || this.dest instanceof DataAddress) {
@@ -59,8 +61,8 @@ public class Store extends Instruction {
         } else {
             if (!(this.src instanceof DataIntLiteral)
                     && ((this.src.globalID == -1 && this.src.refCount <= 0)
-                            || (mipsMachine.storeTime[this.src.registerName] >= mipsMachine.updateTime[this.src.registerName]))
-                    ) {
+                    || (mipsMachine.storeTime[this.src.registerName] >= mipsMachine.updateTime[this.src.registerName]))
+            ) {
                 if (this.dest.registerName == -1) {
                     mipsMachine.rewriteSpecifiedRegister(this.src.registerName, this.dest);
                 } else {
@@ -103,7 +105,7 @@ public class Store extends Instruction {
     public String toMips() {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         if (this.src instanceof DataIntLiteral) {
@@ -120,9 +122,7 @@ public class Store extends Instruction {
             mipsInstructions.add(
                     String.format("\tlw $t1, %s", ((DataAddress) this.dest).address.toAddress())
             );
-            mipsInstructions.add(
-                    String.format("\tsw $t0, 0($t1)")
-            );
+            mipsInstructions.add("\tsw $t0, 0($t1)");
         } else {
             mipsInstructions.add(
                     String.format("\tsw $t0, %s", this.dest.toAddress())

@@ -5,9 +5,11 @@ package cn.edu.sjtu.songyuke.mental.ast.expressions;
  */
 public class UnaryExpression extends Expression {
     public Expression childExpression;
+
     public UnaryExpression() {
         this.childExpression = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<unknown unary expression>";

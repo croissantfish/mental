@@ -15,11 +15,13 @@ public class Call extends Instruction {
     public LinkedList<DataValue> parameters;
     public IRLabelFunction functionName;
     public Data res;
+
     public Call() {
         this.parameters = new LinkedList<>();
         this.functionName = null;
         this.res = null;
     }
+
     public Call(IRLabelFunction functionName) {
         this.parameters = new LinkedList<>();
         this.functionName = functionName;

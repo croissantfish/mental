@@ -1,10 +1,10 @@
 package cn.edu.sjtu.songyuke.mental.ast.declarations;
 
-import cn.edu.sjtu.songyuke.mental.ast.expressions.Expression;
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ast.Variable;
+import cn.edu.sjtu.songyuke.mental.ast.expressions.Expression;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.type.TypeBase;
 
 import java.util.LinkedList;
@@ -15,13 +15,16 @@ import java.util.LinkedList;
 public class SingleVariableDeclaration extends Declaration {
     public Variable variable;
     public Expression initializeExpression;
+
     public SingleVariableDeclaration() {
         this.variable = null;
         this.initializeExpression = null;
     }
+
     public SingleVariableDeclaration(TypeBase type, MentalParser.SingleVariableContext ctx) {
         this.variable = new Variable();
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = "";
@@ -31,6 +34,7 @@ public class SingleVariableDeclaration extends Declaration {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = "";
@@ -40,6 +44,7 @@ public class SingleVariableDeclaration extends Declaration {
         }
         return ret;
     }
+
     @Override
     public String toString() {
         String ret = "";
@@ -49,10 +54,11 @@ public class SingleVariableDeclaration extends Declaration {
             return ret;
         }
         if (this.initializeExpression != null) {
-            ret +=  "=" + this.initializeExpression.toString();
+            ret += "=" + this.initializeExpression;
         }
         return ret;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -61,9 +67,7 @@ public class SingleVariableDeclaration extends Declaration {
         if (other != null) {
             if (other instanceof SingleVariableDeclaration) {
                 if (this.variable.equals(((SingleVariableDeclaration) other).variable)) {
-                    if (this.initializeExpression.equals(((SingleVariableDeclaration) other).initializeExpression)) {
-                        return true;
-                    }
+                    return this.initializeExpression.equals(((SingleVariableDeclaration) other).initializeExpression);
                 }
             }
         }

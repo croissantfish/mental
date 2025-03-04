@@ -13,6 +13,7 @@ public class BranchNotEqualZero extends BranchWithCondition {
         this.condition = null;
         this.nextInstruction = null;
     }
+
     public BranchNotEqualZero(DataValue condition, IRLabel gotoLabel) {
         this.gotoLabel = gotoLabel;
         this.condition = condition;

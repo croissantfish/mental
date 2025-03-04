@@ -18,10 +18,11 @@ public class MIPSMachine {
     public int regLeft;
     public int regRight;
     public int useCount;
+
     public MIPSMachine() {
-        this.loadTime = new int [32];
-        this.updateTime = new int [32];
-        this.storeTime = new int [32];
+        this.loadTime = new int[32];
+        this.updateTime = new int[32];
+        this.storeTime = new int[32];
         this.registerData = new Data[32];
         this.globalTime = 1;
         this.regLeft = MIPSRegister.t0;

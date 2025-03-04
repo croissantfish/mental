@@ -7,6 +7,7 @@ import java.util.LinkedList;
  */
 public class SuperExpression extends Expression {
     public LinkedList<Expression> expressions;
+
     public SuperExpression() {
         this.expressions = new LinkedList<>();
     }

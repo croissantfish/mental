@@ -5,12 +5,13 @@ package cn.edu.sjtu.songyuke.mental.ir.label;
  */
 public class IRLabelEndLoop extends IRLabel {
     public static int nextEndLoop = 0;
+
     public IRLabelEndLoop() {
         this.labelID = nextEndLoop++;
     }
 
     @Override
     public String toString() {
-        return "_end_loop_" + Integer.toString(this.labelID);
+        return "_end_loop_" + this.labelID;
     }
 }

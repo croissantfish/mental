@@ -16,18 +16,22 @@ public class Variable extends BaseNode {
         this.variableType = null;
         this.globalID = 0;
     }
+
     @Override
     public String toPrintString(int indent) {
         return this.toString();
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return this.variableName;
     }
+
     @Override
     public String toString() {
-        return "[" + this.variableName + "@" + this.variableType.toString() + "], global id:" + Integer.toString(this.globalID) + ", local id:" + Integer.toString(this.localID);
+        return "[" + this.variableName + "@" + this.variableType.toString() + "], global id:" + this.globalID + ", local id:" + this.localID;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -36,9 +40,7 @@ public class Variable extends BaseNode {
         if (other != null) {
             if (other instanceof Variable) {
                 if (this.variableName.equals(((Variable) other).variableName)) {
-                    if (this.variableType.equals(((Variable) other).variableType)) {
-                        return true;
-                    }
+                    return this.variableType.equals(((Variable) other).variableType);
                 }
             }
         }

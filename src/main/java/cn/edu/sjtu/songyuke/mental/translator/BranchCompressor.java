@@ -1,9 +1,9 @@
 package cn.edu.sjtu.songyuke.mental.translator;
 
-import cn.edu.sjtu.songyuke.mental.ir.arithmetic.*;
-import cn.edu.sjtu.songyuke.mental.ir.branch.*;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
 import cn.edu.sjtu.songyuke.mental.ir.NullOperation;
+import cn.edu.sjtu.songyuke.mental.ir.arithmetic.*;
+import cn.edu.sjtu.songyuke.mental.ir.branch.*;
 
 /**
  * Created by Songyu on 16/5/5.
@@ -14,9 +14,8 @@ public class BranchCompressor {
         headInstruction.nextInstruction = instruction;
         for (instruction = headInstruction; instruction != null; instruction = instruction.nextInstruction) {
             if (instruction.nextInstruction instanceof Compare) {
-                if (instruction.nextInstruction.nextInstruction instanceof BranchWithCondition) {
+                if (instruction.nextInstruction.nextInstruction instanceof BranchWithCondition branch) {
                     Compare compare = (Compare) instruction.nextInstruction;
-                    BranchWithCondition branch = (BranchWithCondition) instruction.nextInstruction.nextInstruction;
 
                     // whether the result of compare is the condition of the branch
                     if (compare.res == branch.condition && compare.res.refCount == 1) {

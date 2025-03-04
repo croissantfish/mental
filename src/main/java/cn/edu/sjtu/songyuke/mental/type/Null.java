@@ -8,12 +8,11 @@ public class Null extends TypeBase {
     public String toString() {
         return "null-pointer";
     }
+
     @Override
     public boolean equals(Object other) {
         if (other != null) {
-            if (other instanceof Null || other instanceof Array || other instanceof Class) {
-                return true;
-            }
+            return other instanceof Null || other instanceof Array || other instanceof Class;
         }
         return false;
     }

@@ -12,9 +12,11 @@ import java.util.Map;
  */
 public class ClassDeclaration extends Declaration {
     public SymbolType classDetail;
+
     public ClassDeclaration() {
         this.classDetail = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         Class classBody = (Class) this.classDetail.type;
@@ -26,6 +28,7 @@ public class ClassDeclaration extends Declaration {
         ret += BaseNode.addIndent(indent) + "<end>class";
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         Class classBody = (Class) this.classDetail.type;
@@ -37,10 +40,12 @@ public class ClassDeclaration extends Declaration {
         ret += BaseNode.addIndent(indent) + "}\n";
         return ret;
     }
+
     @Override
     public String toString() {
         return "<class>" + this.classDetail.type.toString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -48,9 +53,7 @@ public class ClassDeclaration extends Declaration {
         }
         if (other != null) {
             if (other instanceof ClassDeclaration) {
-                if (this.classDetail.equals(((ClassDeclaration) other).classDetail)) {
-                    return true;
-                }
+                return this.classDetail.equals(((ClassDeclaration) other).classDetail);
             }
         }
         return false;

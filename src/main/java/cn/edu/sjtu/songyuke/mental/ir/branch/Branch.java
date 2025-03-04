@@ -11,9 +11,11 @@ import java.util.LinkedList;
  */
 public class Branch extends Instruction {
     public IRLabel gotoLabel;
+
     public Branch() {
         this.gotoLabel = null;
     }
+
     public Branch(IRLabel gotoLabel) {
         this.gotoLabel = gotoLabel;
     }
@@ -26,7 +28,7 @@ public class Branch extends Instruction {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         mipsInstructions.add(mipsMachine.storeAndCleanMachine());
         mipsInstructions.add(
@@ -47,7 +49,7 @@ public class Branch extends Instruction {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         mipsInstructions.add(

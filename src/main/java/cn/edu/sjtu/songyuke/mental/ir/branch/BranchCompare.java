@@ -12,10 +12,12 @@ import java.util.LinkedList;
  */
 public class BranchCompare extends Branch {
     public DataValue lhs, rhs;
+
     public BranchCompare() {
         this.lhs = null;
         this.rhs = null;
     }
+
     public BranchCompare(DataValue lhs, DataValue rhs, IRLabel gotoLabel) {
         this.lhs = lhs;
         this.rhs = rhs;
@@ -25,7 +27,7 @@ public class BranchCompare extends Branch {
     public String toMips(MIPSMachine mipsMachine, String operand) {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         this.lhs.refCount--;

@@ -13,10 +13,12 @@ import java.util.LinkedList;
 public class Move extends Instruction {
     public DataValue src;
     public DataValue dest;
+
     public Move() {
         this.src = null;
         this.dest = null;
     }
+
     public Move(DataValue src) {
         this.src = src;
         this.src.refCount++;
@@ -39,7 +41,7 @@ public class Move extends Instruction {
     public String toMips(MIPSMachine mipsMachine) {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         if (this.dest.refCount != 0 || this.dest.globalID != -1) {
@@ -87,7 +89,7 @@ public class Move extends Instruction {
     public String toMips() {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         if (this.src instanceof DataIntLiteral) {

@@ -13,6 +13,7 @@ public class CallSubString extends BinaryExpression {
     public CallSubString() {
         this.returnType = SymbolTable.MENTAL_M_STRING;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<string.substring(int,int)>:string\n";
@@ -20,6 +21,7 @@ public class CallSubString extends BinaryExpression {
         ret += addIndent(indent + 1) + "<right bound>\n" + this.rightExpression.toPrintString(indent + 2);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = "substring(";

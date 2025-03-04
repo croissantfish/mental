@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class ExpressionList extends BaseNode {
     public List<Expression> expressions;
+
     public ExpressionList() {
         this.expressions = new ArrayList<>();
     }

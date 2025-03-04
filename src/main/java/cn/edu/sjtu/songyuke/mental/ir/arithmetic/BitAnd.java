@@ -11,6 +11,7 @@ public class BitAnd extends BinaryArithmetic {
     public BitAnd() {
         super();
     }
+
     public BitAnd(DataValue lhs, DataValue rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -23,6 +24,7 @@ public class BitAnd extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "and");
     }
+
     @Override
     public String toMips() {
         return this.toMips("and");

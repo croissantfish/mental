@@ -5,6 +5,7 @@ package cn.edu.sjtu.songyuke.mental.ir;
  */
 public class SystemCall extends Instruction {
     public int variant;
+
     public SystemCall() {
         this.variant = -1;
     }

@@ -12,11 +12,13 @@ import java.util.LinkedList;
 public class MemoryAllocate extends SystemCall {
     public DataValue amount;
     public DataValue res;
+
     public MemoryAllocate() {
         this.variant = 9;
         this.amount = null;
         this.res = null;
     }
+
     public MemoryAllocate(DataValue amount) {
         this.variant = 9;
         this.amount = amount;
@@ -33,7 +35,7 @@ public class MemoryAllocate extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         this.amount.refCount--;
         if (this.amount.registerName == -1) {
@@ -70,7 +72,7 @@ public class MemoryAllocate extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         mipsInstructions.add(
                 "\tli $v0, 9"

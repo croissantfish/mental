@@ -9,6 +9,7 @@ public class JumpLabel extends Branch {
     public JumpLabel() {
         this.gotoLabel = null;
     }
+
     public JumpLabel(IRLabel gotoLabel) {
         this.gotoLabel = gotoLabel;
     }

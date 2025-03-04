@@ -8,6 +8,7 @@ public class UnknownType extends TypeBase {
     public String toString() {
         return "unknown";
     }
+
     @Override
     public boolean equals(Object other) {
         return other != null && other instanceof UnknownType;

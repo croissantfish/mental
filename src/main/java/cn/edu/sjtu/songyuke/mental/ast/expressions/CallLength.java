@@ -13,10 +13,12 @@ public class CallLength extends Expression {
     public CallLength() {
         this.returnType = SymbolTable.mentalInt;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<string.length()>:int";
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return "length()";

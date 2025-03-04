@@ -1,8 +1,8 @@
 package cn.edu.sjtu.songyuke.mental.ast.expressions;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.symbols.SymbolTable;
 
 import java.util.LinkedList;
@@ -15,9 +15,11 @@ public class MulDivExpression extends BinaryExpression {
     public static final int DIV = MentalParser.DIV;
     public static final int MOD = MentalParser.MOD;
     public int op;
+
     public MulDivExpression() {
         this.returnType = SymbolTable.mentalInt;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<multiply expression";
@@ -33,6 +35,7 @@ public class MulDivExpression extends BinaryExpression {
         ret += rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

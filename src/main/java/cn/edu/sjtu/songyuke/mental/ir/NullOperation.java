@@ -23,7 +23,7 @@ public class NullOperation extends Instruction {
     public String toMips() {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
 //        if (this.nextInstruction == null) {

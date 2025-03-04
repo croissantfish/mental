@@ -11,16 +11,20 @@ public class CompareEqual extends Compare {
     public CompareEqual() {
         super();
     }
+
     public CompareEqual(DataValue lhs, DataValue rhs) {
         super(lhs, rhs);
     }
+
     public CompareEqual(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
+
     @Override
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "seq");
     }
+
     @Override
     public String toMips() {
         return this.toMips("seq");

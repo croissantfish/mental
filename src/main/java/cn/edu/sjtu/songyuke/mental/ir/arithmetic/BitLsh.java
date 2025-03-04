@@ -11,6 +11,7 @@ public class BitLsh extends BinaryArithmetic {
     public BitLsh() {
         super();
     }
+
     public BitLsh(DataValue lhs, DataValue rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -23,6 +24,7 @@ public class BitLsh extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "sll");
     }
+
     @Override
     public String toMips() {
         return this.toMips("sll");

@@ -8,6 +8,7 @@ import cn.edu.sjtu.songyuke.mental.type.TypeBase;
  */
 public class SymbolVariable extends SymbolBase {
     public Variable variable;
+
     public SymbolVariable() {
         this.variable = new Variable();
         this.variable.variableName = null;
@@ -15,6 +16,7 @@ public class SymbolVariable extends SymbolBase {
         this.variable.globalID = 0;
         this.stackLayer = 0;
     }
+
     public SymbolVariable(SymbolTable scope, TypeBase type, String name) {
         this.variable = new Variable();
         this.stackLayer = scope.stackLayer;
@@ -22,6 +24,7 @@ public class SymbolVariable extends SymbolBase {
         this.variable.variableName = name;
         this.variable.globalID = 0;
     }
+
     public SymbolVariable(SymbolTable scope, TypeBase type, String name, int id) {
         this.variable = new Variable();
         this.stackLayer = scope.stackLayer;
@@ -29,10 +32,12 @@ public class SymbolVariable extends SymbolBase {
         this.variable.variableName = name;
         this.variable.globalID = id;
     }
+
     @Override
     public String toString() {
-        return "<variable>" + this.variable.variableName + '[' + this.variable.variableType.toString() + "],id:" + Integer.toString(this.variable.globalID);
+        return "<variable>" + this.variable.variableName + '[' + this.variable.variableType.toString() + "],id:" + this.variable.globalID;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -40,9 +45,7 @@ public class SymbolVariable extends SymbolBase {
         }
         if (other != null) {
             if (other instanceof SymbolVariable) {
-                if (this.variable.globalID == ((SymbolVariable) other).variable.globalID) {
-                    return true;
-                }
+                return this.variable.globalID == ((SymbolVariable) other).variable.globalID;
             }
         }
         return false;

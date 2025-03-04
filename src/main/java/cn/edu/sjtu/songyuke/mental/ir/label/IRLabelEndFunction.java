@@ -5,9 +5,11 @@ package cn.edu.sjtu.songyuke.mental.ir.label;
  */
 public class IRLabelEndFunction extends IRLabel {
     public String functionName;
+
     public IRLabelEndFunction() {
         this.functionName = "";
     }
+
     public IRLabelEndFunction(String functionName) {
         this.functionName = functionName;
     }

@@ -11,9 +11,11 @@ import java.util.LinkedList;
  */
 public class Return extends Branch {
     public DataValue returnValue;
+
     public Return() {
         this.returnValue = null;
     }
+
     public Return(IRLabel gotoLabel, DataValue returnValue) {
         super(gotoLabel);
         this.returnValue = returnValue;
@@ -29,7 +31,7 @@ public class Return extends Branch {
         }
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         if (this.returnValue != null) {
             if (this.returnValue.registerName == -1) {

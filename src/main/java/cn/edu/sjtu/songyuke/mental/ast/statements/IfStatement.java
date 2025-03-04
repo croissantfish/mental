@@ -13,11 +13,13 @@ public class IfStatement extends Statement {
     public Expression condition;
     public Statement thenStatement;
     public Statement elseStatement;
+
     public IfStatement() {
         this.condition = null;
         this.thenStatement = null;
         this.elseStatement = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<if statement>\n";
@@ -28,6 +30,7 @@ public class IfStatement extends Statement {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent) + "if (";

@@ -1,9 +1,9 @@
 package cn.edu.sjtu.songyuke.mental.ast.declarations;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ast.BaseNode;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.type.TypeBase;
 
 import java.util.LinkedList;
@@ -15,10 +15,12 @@ import java.util.List;
 public class VariableDeclaration extends BaseNode {
     public TypeBase variableType;
     public List<SingleVariableDeclaration> variables;
+
     public VariableDeclaration() {
         this.variables = new LinkedList<>();
         this.variableType = null;
     }
+
     public VariableDeclaration(TypeBase type, MentalParser.VariableDefinitionContext ctx) {
         this.variables = new LinkedList<>();
 
@@ -26,6 +28,7 @@ public class VariableDeclaration extends BaseNode {
             this.variables.add(new SingleVariableDeclaration(type, varCtx));
         }
     }
+
     @Override
     public String toPrintString(int indent) {
         if (this.variables.size() == 0) {
@@ -39,6 +42,7 @@ public class VariableDeclaration extends BaseNode {
             return ret;
         }
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         if (this.variables.size() > 0) {
@@ -51,6 +55,7 @@ public class VariableDeclaration extends BaseNode {
         }
         return ";";
     }
+
     @Override
     public String toString() {
         String ret = "(";
@@ -60,6 +65,7 @@ public class VariableDeclaration extends BaseNode {
         ret += ")";
         return ret;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -67,9 +73,7 @@ public class VariableDeclaration extends BaseNode {
         }
         if (other != null) {
             if (other instanceof VariableDeclaration) {
-                if (this.variables.equals(((VariableDeclaration) other).variables)) {
-                    return true;
-                }
+                return this.variables.equals(((VariableDeclaration) other).variables);
             }
         }
         return false;

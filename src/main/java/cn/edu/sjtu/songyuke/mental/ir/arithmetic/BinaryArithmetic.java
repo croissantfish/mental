@@ -13,9 +13,11 @@ import java.util.LinkedList;
  */
 public abstract class BinaryArithmetic extends Arithmetic {
     public DataValue lhs, rhs;
+
     public BinaryArithmetic() {
         this.lhs = this.rhs = null;
     }
+
     public BinaryArithmetic(DataValue lhs, DataValue rhs) {
         this.lhs = lhs;
         this.lhs.refCount++;
@@ -23,6 +25,7 @@ public abstract class BinaryArithmetic extends Arithmetic {
         this.rhs.refCount++;
         this.res = new DataValue();
     }
+
     public BinaryArithmetic(DataValue lhs, DataValue rhs, DataValue res) {
         this.lhs = lhs;
         this.lhs.refCount++;
@@ -42,7 +45,7 @@ public abstract class BinaryArithmetic extends Arithmetic {
     public String toMips(MIPSMachine mipsMachine, String operand) {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         this.lhs.refCount--;
         this.rhs.refCount--;
@@ -95,7 +98,7 @@ public abstract class BinaryArithmetic extends Arithmetic {
 
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         if (this.lhs instanceof DataIntLiteral) {

@@ -7,6 +7,7 @@ public class Bool extends TypeBase {
     public String toString() {
         return "bool";
     }
+
     @Override
     public boolean equals(Object other) {
         return other != null && other instanceof Bool;

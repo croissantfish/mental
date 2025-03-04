@@ -11,6 +11,7 @@ public class BitOr extends BinaryArithmetic {
     public BitOr() {
         super();
     }
+
     public BitOr(DataValue lhs, DataValue rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -23,6 +24,7 @@ public class BitOr extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "or");
     }
+
     @Override
     public String toMips() {
         return this.toMips("or");

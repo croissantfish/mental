@@ -4,16 +4,15 @@ package cn.edu.sjtu.songyuke.mental.core;
  * Created by Songyu on 16/3/28.
  */
 
-import cn.edu.sjtu.songyuke.mental.ast.Program;
-import cn.edu.sjtu.songyuke.mental.ast.BuildTreeListener;
-import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
-import cn.edu.sjtu.songyuke.mental.ir.data.DataStringLiteral;
-import cn.edu.sjtu.songyuke.mental.ir.data.DataValue;
-import cn.edu.sjtu.songyuke.mental.ir.Instruction;
 import cn.edu.sjtu.songyuke.mental.antlr4.MentalLexer;
 import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
+import cn.edu.sjtu.songyuke.mental.ast.BuildTreeListener;
+import cn.edu.sjtu.songyuke.mental.ast.Program;
+import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
+import cn.edu.sjtu.songyuke.mental.ir.Instruction;
+import cn.edu.sjtu.songyuke.mental.ir.data.DataStringLiteral;
+import cn.edu.sjtu.songyuke.mental.ir.data.DataValue;
 import cn.edu.sjtu.songyuke.mental.translator.*;
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;

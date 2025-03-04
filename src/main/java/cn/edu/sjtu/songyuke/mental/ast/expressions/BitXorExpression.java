@@ -14,6 +14,7 @@ public class BitXorExpression extends BinaryExpression {
         this.returnType = SymbolTable.mentalInt;
         this.leftExpression = this.rightExpression = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<bit xor expression>\n";
@@ -21,6 +22,7 @@ public class BitXorExpression extends BinaryExpression {
         ret += this.rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

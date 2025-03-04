@@ -1,6 +1,6 @@
 package cn.edu.sjtu.songyuke.mental.translator;
 
-import cn.edu.sjtu.songyuke.mental.ir.*;
+import cn.edu.sjtu.songyuke.mental.ir.Instruction;
 
 import java.util.LinkedList;
 
@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class MIPSTranslator {
     public MIPSMachine machine;
     public LinkedList<String> mipsStatement;
+
     public MIPSTranslator() {
         this.machine = new MIPSMachine();
         this.mipsStatement = new LinkedList<>();

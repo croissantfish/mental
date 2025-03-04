@@ -11,6 +11,7 @@ public class Mod extends BinaryArithmetic {
     public Mod() {
         super();
     }
+
     public Mod(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -19,6 +20,7 @@ public class Mod extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "rem");
     }
+
     @Override
     public String toMips() {
         return this.toMips("rem");

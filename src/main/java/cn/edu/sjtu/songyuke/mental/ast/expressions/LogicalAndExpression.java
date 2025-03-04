@@ -14,6 +14,7 @@ public class LogicalAndExpression extends BinaryExpression {
         this.returnType = SymbolTable.mentalBool;
         this.leftExpression = this.rightExpression = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<logical and expression>\n";
@@ -21,6 +22,7 @@ public class LogicalAndExpression extends BinaryExpression {
         ret += this.rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

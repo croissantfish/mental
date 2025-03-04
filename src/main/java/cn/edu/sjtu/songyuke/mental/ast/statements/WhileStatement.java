@@ -12,10 +12,12 @@ import java.util.LinkedList;
 public class WhileStatement extends Statement {
     public Expression cond;
     public Statement loopBody;
+
     public WhileStatement() {
         this.cond = null;
         this.loopBody = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<while expression>\n";
@@ -23,6 +25,7 @@ public class WhileStatement extends Statement {
         ret += addIndent(indent + 1) + "<loop body>\n" + this.loopBody.toPrintString(indent + 2);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent) + "while (";
@@ -34,10 +37,12 @@ public class WhileStatement extends Statement {
         }
         return ret;
     }
+
     @Override
     public String toString() {
         return "<while loopBody>";
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -46,9 +51,7 @@ public class WhileStatement extends Statement {
         if (other != null) {
             if (other instanceof WhileStatement) {
                 if (this.cond.equals(((WhileStatement) other).cond)) {
-                    if (this.loopBody.equals(((WhileStatement) other).loopBody)) {
-                        return true;
-                    }
+                    return this.loopBody.equals(((WhileStatement) other).loopBody);
                 }
             }
         }

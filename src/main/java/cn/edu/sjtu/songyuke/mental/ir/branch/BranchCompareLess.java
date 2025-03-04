@@ -15,6 +15,7 @@ public class BranchCompareLess extends BranchCompare {
     public BranchCompareLess(DataValue lhs, DataValue rhs, IRLabel gotoLabel) {
         super(lhs, rhs, gotoLabel);
     }
+
     @Override
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "blt");

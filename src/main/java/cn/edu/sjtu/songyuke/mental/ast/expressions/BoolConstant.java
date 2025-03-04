@@ -11,16 +11,19 @@ import java.util.LinkedList;
  */
 public class BoolConstant extends Expression {
     public boolean boolConstant;
+
     public BoolConstant() {
         this.returnType = SymbolTable.mentalBool;
     }
+
     @Override
     public String toPrintString(int indent) {
-        return addIndent(indent) + "<bool>:" + Boolean.toString(this.boolConstant);
+        return addIndent(indent) + "<bool>:" + this.boolConstant;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
-        return addIndent(indent) + Boolean.toString(this.boolConstant);
+        return addIndent(indent) + this.boolConstant;
     }
 
     @Override

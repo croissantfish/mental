@@ -12,10 +12,12 @@ import java.util.LinkedList;
  */
 public class PrintString extends SystemCall {
     public Data stringLocation;
+
     public PrintString() {
         this.variant = 4;
         this.stringLocation = null;
     }
+
     public PrintString(Data stringLocation) {
         this.variant = 4;
         this.stringLocation = stringLocation;
@@ -32,7 +34,7 @@ public class PrintString extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         if (this.stringLocation instanceof DataValue) {
             this.stringLocation.refCount--;
@@ -64,7 +66,7 @@ public class PrintString extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         mipsInstructions.add("\tli $v0, 4");

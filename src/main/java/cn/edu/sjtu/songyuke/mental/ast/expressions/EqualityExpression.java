@@ -1,8 +1,8 @@
 package cn.edu.sjtu.songyuke.mental.ast.expressions;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.symbols.SymbolTable;
 
 import java.util.LinkedList;
@@ -14,10 +14,12 @@ public class EqualityExpression extends BinaryExpression {
     public static final int EQUAL = MentalParser.EQUAL;
     public static final int INEQUAL = MentalParser.INEQUAL;
     public int op;
+
     public EqualityExpression() {
         this.op = 0;
         this.returnType = SymbolTable.mentalBool;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<equality expression";
@@ -30,6 +32,7 @@ public class EqualityExpression extends BinaryExpression {
         ret += this.rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

@@ -11,10 +11,12 @@ import java.util.LinkedList;
  */
 public abstract class UnaryArithmetic extends Arithmetic {
     public DataValue child;
+
     public UnaryArithmetic() {
         super();
         this.child = null;
     }
+
     public UnaryArithmetic(DataValue child, DataValue res) {
         this.child = child;
         this.child.refCount++;
@@ -24,7 +26,7 @@ public abstract class UnaryArithmetic extends Arithmetic {
     public String toMips(MIPSMachine mipsMachine, String operand) {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         this.child.refCount--;
         if (this.child.registerName == -1) {
@@ -55,11 +57,12 @@ public abstract class UnaryArithmetic extends Arithmetic {
         }
         return str.substring(0, str.length() - 1);
     }
+
     // for cisc code generation.
     public String toMips(String operand) {
         LinkedList<String> mipsInstructions = new LinkedList<>();
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         if (this.child instanceof DataIntLiteral) {

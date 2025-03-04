@@ -10,18 +10,22 @@ import cn.edu.sjtu.songyuke.mental.type.TypeBase;
 public class Expression extends BaseNode {
     public boolean leftValue;
     public TypeBase returnType;
+
     public Expression() {
         this.leftValue = false;
         this.returnType = SymbolTable.mentalUnknownType;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<expression>:" + returnType.toString();
     }
+
     @Override
     public String toString() {
         return "<unknown expression>";
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -29,9 +33,7 @@ public class Expression extends BaseNode {
         }
         if (other != null) {
             if (other instanceof Expression) {
-                if (this.returnType.equals(((Expression) other).returnType)) {
-                    return true;
-                }
+                return this.returnType.equals(((Expression) other).returnType);
             }
         }
         return false;

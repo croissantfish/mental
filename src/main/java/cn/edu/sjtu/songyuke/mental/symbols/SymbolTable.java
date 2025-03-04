@@ -1,8 +1,7 @@
 package cn.edu.sjtu.songyuke.mental.symbols;
 
-import cn.edu.sjtu.songyuke.mental.type.*;
-import cn.edu.sjtu.songyuke.mental.type.MxString;
 import cn.edu.sjtu.songyuke.mental.type.Void;
+import cn.edu.sjtu.songyuke.mental.type.*;
 
 import java.util.HashMap;
 
@@ -17,8 +16,9 @@ public class SymbolTable {
     public static final Null mentalNull = new Null();
     public static final UnknownType mentalUnknownType = new UnknownType();
     public static final int maxLayer = 2147483647;
-    private HashMap<java.lang.String, SymbolBase> table;
     public int stackLayer;
+    private final HashMap<java.lang.String, SymbolBase> table;
+
     public SymbolTable() {
         this.stackLayer = 0;
         this.table = new HashMap<>();
@@ -43,10 +43,12 @@ public class SymbolTable {
         symbolVoid.stackLayer = maxLayer;
         this.table.put("void", symbolVoid);
     }
+
     public SymbolTable(SymbolTable other) {
         this.stackLayer = other.stackLayer;
         this.table = new HashMap<>(other.table);
     }
+
     public void add(java.lang.String id, SymbolBase symbol) {
         if (this.table.get(id) != null) {
             if (this.table.get(id).stackLayer < symbol.stackLayer) {
@@ -59,9 +61,11 @@ public class SymbolTable {
             this.table.put(id, symbol);
         }
     }
+
     public HashMap<java.lang.String, SymbolBase> getTable() {
         return this.table;
     }
+
     public SymbolBase getSymbol(java.lang.String id) {
         return this.table.get(id);
     }

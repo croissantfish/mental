@@ -14,12 +14,14 @@ public class LogicalNotExpression extends UnaryExpression {
         this.childExpression = null;
         this.returnType = SymbolTable.mentalBool;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<logical not expression>:boolean\n";
         ret += this.childExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent) + "!";

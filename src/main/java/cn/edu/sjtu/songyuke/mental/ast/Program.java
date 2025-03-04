@@ -10,9 +10,11 @@ import java.util.LinkedList;
  */
 public class Program extends BaseNode {
     public LinkedList<BaseNode> declarations;
+
     public Program() {
         this.declarations = new LinkedList<>();
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<begin>program\n";
@@ -24,6 +26,7 @@ public class Program extends BaseNode {
         ret += addIndent(indent) + "<end>program";
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);
@@ -34,10 +37,12 @@ public class Program extends BaseNode {
         }
         return ret;
     }
+
     @Override
     public String toString() {
         return "<program>";
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -45,9 +50,7 @@ public class Program extends BaseNode {
         }
         if (other != null) {
             if (other instanceof Program) {
-                if (this.declarations.equals(((Program) other).declarations)) {
-                    return true;
-                }
+                return this.declarations.equals(((Program) other).declarations);
             }
         }
         return false;

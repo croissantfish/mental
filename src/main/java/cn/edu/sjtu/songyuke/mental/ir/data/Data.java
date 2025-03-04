@@ -11,6 +11,7 @@ public abstract class Data {
     public IRLabelGlobalData globalDataLabel;
     public int globalID;
     public int refCount;
+
     public Data() {
         this.registerName = -1;
         this.stackShift = 2147483647 >> 1;
@@ -23,8 +24,9 @@ public abstract class Data {
         if (this.registerName == -1) {
             throw new RuntimeException("error register name.");
         }
-        return "$" + Integer.toString(this.registerName);
+        return "$" + this.registerName;
     }
+
     public String toAddress() {
         // basic data class cannot call this function.
         throw new RuntimeException(this.toString());

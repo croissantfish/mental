@@ -15,12 +15,14 @@ public class FunctionDefinition extends Declaration {
     public CompoundStatement functionBody;
     public int firstVariableID;
     public int lastVariableID;
+
     public FunctionDefinition() {
         this.functionHead = new SymbolFunction();
         this.functionBody = new CompoundStatement();
         this.firstVariableID = 0;
         this.lastVariableID = 0;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<begin>function\n";
@@ -31,6 +33,7 @@ public class FunctionDefinition extends Declaration {
         ret += addIndent(indent) + "<end>function";
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent)
@@ -45,13 +48,15 @@ public class FunctionDefinition extends Declaration {
         ret += this.functionBody.toPrettyPrint(indent + 1) + '\n';
         return ret;
     }
+
     @Override
     public String toString() {
         if (this.functionHead == null || this.functionBody == null) {
             return "";
         }
-        return this.functionHead.toString() + ":" + this.functionBody.toString();
+        return this.functionHead + ":" + this.functionBody.toString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -59,9 +64,7 @@ public class FunctionDefinition extends Declaration {
         }
         if (other != null) {
             if (other instanceof FunctionDefinition) {
-                if (this.functionHead.equals(((FunctionDefinition) other).functionHead)) {
-                    return true;
-                }
+                return this.functionHead.equals(((FunctionDefinition) other).functionHead);
             }
         }
         return false;

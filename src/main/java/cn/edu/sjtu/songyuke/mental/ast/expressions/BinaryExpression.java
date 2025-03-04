@@ -7,10 +7,12 @@ import cn.edu.sjtu.songyuke.mental.ast.BaseNode;
  */
 public class BinaryExpression extends Expression {
     public Expression leftExpression, rightExpression;
+
     public BinaryExpression() {
         this.leftExpression = new Expression();
         this.rightExpression = new Expression();
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = BaseNode.addIndent(indent) + "<binary expression>:" + this.returnType.toString() + '\n';
@@ -18,6 +20,7 @@ public class BinaryExpression extends Expression {
         ret += rightExpression.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -26,9 +29,7 @@ public class BinaryExpression extends Expression {
         if (other != null) {
             if (other instanceof BinaryExpression) {
                 if (this.leftExpression.equals(((BinaryExpression) other).leftExpression)) {
-                    if (this.rightExpression.equals(((BinaryExpression) other).rightExpression)) {
-                        return true;
-                    }
+                    return this.rightExpression.equals(((BinaryExpression) other).rightExpression);
                 }
             }
         }

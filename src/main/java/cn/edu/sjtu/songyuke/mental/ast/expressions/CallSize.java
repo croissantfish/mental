@@ -13,10 +13,12 @@ public class CallSize extends Expression {
     public CallSize() {
         this.returnType = SymbolTable.mentalInt;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<array.size()>:int";
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return "size()";

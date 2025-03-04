@@ -3,8 +3,8 @@ package cn.edu.sjtu.songyuke.mental.symbols;
 import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.type.Array;
 import cn.edu.sjtu.songyuke.mental.type.Class;
-import cn.edu.sjtu.songyuke.mental.type.TypeBase;
 import cn.edu.sjtu.songyuke.mental.type.ClassMember;
+import cn.edu.sjtu.songyuke.mental.type.TypeBase;
 
 import java.util.HashMap;
 
@@ -14,15 +14,19 @@ import java.util.HashMap;
 
 public class SymbolType extends SymbolBase {
     public TypeBase type;
+
     public SymbolType() {
         this.type = new Class();
     }
+
     public SymbolType(SymbolType other) {
         this.type = other.type;
     }
+
     public void setType(TypeBase type) {
         this.type = type;
     }
+
     public boolean setType(SymbolTable scope, MentalParser.ClassDeclarationContext classDeclCtx) {
         int classMemberCount = 0;
         boolean existError = false;
@@ -42,7 +46,7 @@ public class SymbolType extends SymbolBase {
 
             // if baseType is not a cn.edu.sjtu.songyuke.mental.type then halt
             if (!(varDefCtx.type().typeName().getText().equals(classDeclCtx.className().getText()))) {
-                if (baseType == null || !(baseType instanceof SymbolType)) {
+                if (!(baseType instanceof SymbolType)) {
                     System.err.println("fatal: declarate a variable with bad cn.edu.sjtu.songyuke.mental.type.");
                     existError = true;
                     System.exit(1);
@@ -50,7 +54,7 @@ public class SymbolType extends SymbolBase {
             }
 
             TypeBase type;
-            if (varDefCtx.type().array().size() != 0) {
+            if (!varDefCtx.type().array().isEmpty()) {
                 // if the cn.edu.sjtu.songyuke.mental.type is an array.
 
                 type = new Array(varDefCtx.type());
@@ -86,10 +90,12 @@ public class SymbolType extends SymbolBase {
         ((Class) type).classSize = classMemberCount;
         return existError;
     }
+
     @Override
     public String toString() {
         return "<cn.edu.sjtu.songyuke.mental.type>" + this.type.toString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -97,9 +103,7 @@ public class SymbolType extends SymbolBase {
         }
         if (other != null) {
             if (other instanceof SymbolType) {
-                if (this.type.equals(((SymbolType) other).type)) {
-                    return true;
-                }
+                return this.type.equals(((SymbolType) other).type);
             }
         }
         return false;

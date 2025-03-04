@@ -11,28 +11,31 @@ import java.util.LinkedList;
  */
 public class VarStatement extends Statement {
     public VariableDeclaration variableDeclaration;
+
     public VarStatement() {
         this.variableDeclaration = new VariableDeclaration();
     }
+
     @Override
     public String toPrintString(int indent) {
         return this.variableDeclaration.toPrintString(indent);
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return this.variableDeclaration.toPrettyPrint(indent);
     }
+
     @Override
     public String toString() {
         return "<variable declaration loopBody>";
     }
+
     @Override
     public boolean equals(Object other) {
         if (other != null) {
             if (other instanceof VarStatement) {
-                if (this.variableDeclaration.equals(((VarStatement) other).variableDeclaration)) {
-                    return true;
-                }
+                return this.variableDeclaration.equals(((VarStatement) other).variableDeclaration);
             }
         }
         return false;

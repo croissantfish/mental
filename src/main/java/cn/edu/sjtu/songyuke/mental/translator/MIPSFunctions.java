@@ -7,10 +7,12 @@ import cn.edu.sjtu.songyuke.mental.ir.Instruction;
  */
 public class MIPSFunctions extends MIPSTranslator {
     public int stackSize;
+
     public MIPSFunctions() {
         super();
         this.stackSize = 0;
     }
+
     public void translate(int stackSize, Instruction instruction) {
         mipsStatement.add(instruction.label.toString() + ":");
         this.stackSize = stackSize;

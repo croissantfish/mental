@@ -10,16 +10,19 @@ public class Array extends TypeBase {
     public int arrayDim;
     public TypeBase arrayType;
     public String typeName;
+
     public Array() {
         this.arrayDim = 0;
         this.arrayType = null;
         this.typeName = null;
     }
+
     public Array(Array other) {
         this.arrayType = other.arrayType;
         this.arrayDim = other.arrayDim;
         this.typeName = other.typeName;
     }
+
     public Array(MentalParser.TypeContext typeCtx) {
         this.arrayType = null;
         this.arrayDim = typeCtx.array().size();
@@ -35,6 +38,7 @@ public class Array extends TypeBase {
             this.arrayType = SymbolTable.mentalUnknownType;
         }
     }
+
     @Override
     public String toString() {
         String ret = this.arrayType.toString();
@@ -43,6 +47,7 @@ public class Array extends TypeBase {
         }
         return ret;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -54,9 +59,7 @@ public class Array extends TypeBase {
             }
             if (other instanceof Array) {
                 if (this.arrayType.equals(((Array) other).arrayType)) {
-                    if (this.arrayDim == ((Array) other).arrayDim) {
-                        return true;
-                    }
+                    return this.arrayDim == ((Array) other).arrayDim;
                 }
             }
         }

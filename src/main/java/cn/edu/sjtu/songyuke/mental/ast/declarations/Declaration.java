@@ -8,12 +8,14 @@ import cn.edu.sjtu.songyuke.mental.ast.BaseNode;
 public abstract class Declaration extends BaseNode {
     @Override
     public String toPrintString(int indent) {
-        return this.addIndent(indent) + "<declaration>";
+        return addIndent(indent) + "<declaration>";
     }
+
     @Override
     public String toString() {
         return "<declaration>";
     }
+
     @Override
     public boolean equals(Object other) {
         return other != null && other instanceof Declaration;

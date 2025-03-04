@@ -14,11 +14,13 @@ public class Load extends Instruction {
     public DataAddress src;
     public DataValue dest;
     public int loadSize;
+
     public Load() {
         this.src = null;
         this.dest = null;
         this.loadSize = 4;
     }
+
     public Load(DataAddress src) {
         this.loadSize = 4;
         this.src = src;
@@ -27,6 +29,7 @@ public class Load extends Instruction {
         }
         this.dest = new DataValue();
     }
+
     public Load(DataAddress src, int loadSize) {
         this.src = src;
         if (!(this.src instanceof DataStringLiteral)) {
@@ -41,12 +44,12 @@ public class Load extends Instruction {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
 
         if (this.src instanceof DataStringLiteral) {
-            if (((DataStringLiteral) this.src).registerName == -1) {
+            if (this.src.registerName == -1) {
                 mipsInstructions.add(mipsMachine.storeFirstLoadRegister());
                 mipsInstructions.add(mipsMachine.replaceFirstLoadRegisterWithLoad(this.src));
             }
@@ -59,7 +62,7 @@ public class Load extends Instruction {
             mipsInstructions.add(
                     String.format("\tmove %s, %s", this.dest.toRegister(), this.src.toRegister())
             );
-            ((DataStringLiteral) this.src).registerName = -1;
+            this.src.registerName = -1;
         } else {
             this.src.address.refCount--;
             if (this.src.address.registerName == -1) {
@@ -100,7 +103,7 @@ public class Load extends Instruction {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         if (this.src instanceof DataStringLiteral) {
             mipsInstructions.add(
@@ -111,13 +114,9 @@ public class Load extends Instruction {
                     String.format("\tlw $t0, %s", this.src.address.toAddress())
             );
             if (this.loadSize == 4) {
-                mipsInstructions.add(
-                        String.format("\tlw $t0, 0($t0)")
-                );
+                mipsInstructions.add("\tlw $t0, 0($t0)");
             } else {
-                mipsInstructions.add(
-                        String.format("\tlb $t0, 0($t0)")
-                );
+                mipsInstructions.add("\tlb $t0, 0($t0)");
             }
         }
         mipsInstructions.add(

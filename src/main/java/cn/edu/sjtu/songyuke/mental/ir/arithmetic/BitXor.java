@@ -11,6 +11,7 @@ public class BitXor extends BinaryArithmetic {
     public BitXor() {
         super();
     }
+
     public BitXor(DataValue lhs, DataValue rhs, DataValue res) {
         super(lhs, rhs, res);
     }
@@ -23,6 +24,7 @@ public class BitXor extends BinaryArithmetic {
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "xor");
     }
+
     @Override
     public String toMips() {
         return this.toMips("xor");

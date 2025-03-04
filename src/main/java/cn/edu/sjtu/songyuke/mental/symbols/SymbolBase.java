@@ -5,15 +5,18 @@ package cn.edu.sjtu.songyuke.mental.symbols;
  */
 public class SymbolBase {
     public int stackLayer;
+
     public SymbolBase() {
         this.stackLayer = 0;
     }
+
     @Override
     public String toString() {
         return "SymbolBase";
     }
+
     @Override
     public boolean equals(Object other) {
-        return other != null && other instanceof SymbolBase;
+        return other instanceof SymbolBase;
     }
 }

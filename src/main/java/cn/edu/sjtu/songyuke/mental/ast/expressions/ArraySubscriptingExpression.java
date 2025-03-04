@@ -11,9 +11,11 @@ import java.util.LinkedList;
 public class ArraySubscriptingExpression extends Expression {
     public Expression primaryExpression;
     public Expression positionExpression;
+
     public ArraySubscriptingExpression() {
         this.leftValue = true;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<array subscripting expression>:" + this.returnType + "\n";
@@ -21,6 +23,7 @@ public class ArraySubscriptingExpression extends Expression {
         ret += addIndent(indent + 1) + "<position expression>\n" + this.positionExpression.toPrintString(indent + 2);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

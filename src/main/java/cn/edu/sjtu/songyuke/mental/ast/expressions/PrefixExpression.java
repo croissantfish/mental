@@ -1,8 +1,8 @@
 package cn.edu.sjtu.songyuke.mental.ast.expressions;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ir.AstVisitor;
 import cn.edu.sjtu.songyuke.mental.ir.Instruction;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.symbols.SymbolTable;
 
 import java.util.LinkedList;
@@ -14,11 +14,13 @@ public class PrefixExpression extends UnaryExpression {
     public static final int PLUS_PLUS = MentalParser.INC;
     public static final int MINUS_MINUS = MentalParser.DEC;
     public int op;
+
     public PrefixExpression() {
         this.leftValue = false;
         this.op = 0;
         this.returnType = SymbolTable.mentalInt;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<prefix expression (";
@@ -29,6 +31,7 @@ public class PrefixExpression extends UnaryExpression {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

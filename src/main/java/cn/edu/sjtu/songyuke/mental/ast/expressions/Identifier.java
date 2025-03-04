@@ -13,19 +13,23 @@ import java.util.LinkedList;
 public class Identifier extends Expression {
     public String name;
     public Variable variable;
+
     public Identifier() {
         this.name = "";
         this.returnType = SymbolTable.mentalUnknownType;
         this.variable = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<identifier>" + this.variable.toString();
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return addIndent(indent) + this.name;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -33,9 +37,7 @@ public class Identifier extends Expression {
         }
         if (other != null) {
             if (other instanceof Identifier) {
-                if (this.name.equals(((Identifier) other).name)) {
-                    return true;
-                }
+                return this.name.equals(((Identifier) other).name);
             }
         }
         return false;

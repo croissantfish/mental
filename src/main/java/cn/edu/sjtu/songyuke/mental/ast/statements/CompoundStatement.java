@@ -12,9 +12,11 @@ import java.util.List;
  */
 public class CompoundStatement extends Statement {
     public List<BaseNode> statements;
+
     public CompoundStatement() {
         this.statements = new LinkedList<>();
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = "";
@@ -28,6 +30,7 @@ public class CompoundStatement extends Statement {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = "{\n";
@@ -39,6 +42,7 @@ public class CompoundStatement extends Statement {
         ret += addIndent(indent - 1) + "}";
         return ret;
     }
+
     @Override
     public String toString() {
         if (this.statements == null) {
@@ -47,6 +51,7 @@ public class CompoundStatement extends Statement {
             return "<component>[" + this.statements.size() + " statements]";
         }
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -54,9 +59,7 @@ public class CompoundStatement extends Statement {
         }
         if (other != null) {
             if (other instanceof CompoundStatement) {
-                if (this.statements.equals(((CompoundStatement) other).statements)) {
-                    return true;
-                }
+                return this.statements.equals(((CompoundStatement) other).statements);
             }
         }
         return false;

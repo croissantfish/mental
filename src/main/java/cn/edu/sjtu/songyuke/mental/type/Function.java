@@ -7,13 +7,16 @@ import cn.edu.sjtu.songyuke.mental.symbols.SymbolFunction;
  */
 public class Function extends TypeBase {
     public SymbolFunction functionHead;
+
     public Function() {
         this.functionHead = new SymbolFunction();
     }
+
     @Override
     public String toString() {
         return "function";
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -21,9 +24,7 @@ public class Function extends TypeBase {
         }
         if (other != null) {
             if (other instanceof Function) {
-                if (this.functionHead.equals(((Function) other).functionHead)) {
-                    return true;
-                }
+                return this.functionHead.equals(((Function) other).functionHead);
             }
         }
         return false;

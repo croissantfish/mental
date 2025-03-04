@@ -11,6 +11,7 @@ public class MIPSProgram {
     public LinkedList<MIPSFunctions> functions;
     public LinkedList<String> beginMainLabel;
     public LinkedList<String> endMainLabel;
+
     public MIPSProgram() {
         this.staticData = new MIPSStaticData();
         this.globalInitialize = new MIPSGlobalInitialize();
@@ -38,6 +39,7 @@ public class MIPSProgram {
         this.endMainLabel.add("\tli $v0, 17");
         this.endMainLabel.add("\tsyscall");
     }
+
     public String toString() {
         String program = "";
         for (String statement : this.staticData.mipsStatements) {
@@ -58,7 +60,7 @@ public class MIPSProgram {
         }
 
         for (MIPSFunctions function : this.functions) {
-            for (String statement: function.mipsStatement) {
+            for (String statement : function.mipsStatement) {
                 if (statement.length() > 0) {
                     program += statement + "\n";
                 }

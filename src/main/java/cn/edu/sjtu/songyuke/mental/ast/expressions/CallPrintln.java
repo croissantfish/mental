@@ -11,10 +11,12 @@ import java.util.LinkedList;
  */
 public class CallPrintln extends Expression {
     public Expression parameter;
+
     public CallPrintln() {
         this.returnType = SymbolTable.mentalVoid;
         this.parameter = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = "";
@@ -22,6 +24,7 @@ public class CallPrintln extends Expression {
         ret += this.parameter.toPrintString(indent + 1);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return addIndent(indent) + "println(" + this.parameter.toPrettyPrint() + ")";

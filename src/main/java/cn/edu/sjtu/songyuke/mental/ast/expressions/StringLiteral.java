@@ -11,18 +11,22 @@ import java.util.LinkedList;
  */
 public class StringLiteral extends Expression {
     public String literalContext;
+
     public StringLiteral() {
         this.literalContext = "";
         this.returnType = SymbolTable.MENTAL_M_STRING;
     }
+
     @Override
     public String toPrintString(int indent) {
         return addIndent(indent) + "<string-literal>:" + this.literalContext;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         return addIndent(indent) + this.literalContext;
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -30,9 +34,7 @@ public class StringLiteral extends Expression {
         }
         if (other != null) {
             if (other instanceof StringLiteral) {
-                if (this.literalContext.equals(((StringLiteral) other).literalContext)) {
-                    return true;
-                }
+                return this.literalContext.equals(((StringLiteral) other).literalContext);
             }
         }
         return false;

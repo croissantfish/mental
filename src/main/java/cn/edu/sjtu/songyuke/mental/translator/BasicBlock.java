@@ -9,6 +9,7 @@ public class BasicBlock {
     public Instruction instruction;
     public BasicBlock nextBlock;
     public boolean allowAppend;
+
     public BasicBlock() {
         this.instruction = null;
         this.nextBlock = null;

@@ -11,10 +11,12 @@ import java.util.LinkedList;
  */
 public class GetInt extends SystemCall {
     public Data res;
+
     public GetInt() {
         this.variant = 5;
         this.res = new DataValue();
     }
+
     public GetInt(Data res) {
         this.res = res;
     }
@@ -24,7 +26,7 @@ public class GetInt extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         mipsInstructions.add(mipsMachine.storeAndCleanMachine());
@@ -47,7 +49,7 @@ public class GetInt extends SystemCall {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
 
         mipsInstructions.add("\tli $v0, 5");

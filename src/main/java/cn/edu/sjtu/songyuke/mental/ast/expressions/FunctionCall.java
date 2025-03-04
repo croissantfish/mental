@@ -14,11 +14,13 @@ public class FunctionCall extends Expression {
     public SymbolFunction functionHead;
     public String functionName;
     public ExpressionList parameters;
+
     public FunctionCall() {
         this.functionHead = null;
         this.functionName = null;
         this.parameters = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<function call>:" + this.returnType.toString() + "\n"
@@ -37,6 +39,7 @@ public class FunctionCall extends Expression {
             return ret;
         }
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent) + this.functionHead.functionName;
@@ -44,7 +47,7 @@ public class FunctionCall extends Expression {
             ret += "()";
             return ret;
         } else {
-            ret += "("  + this.parameters.expressions.get(0).toPrettyPrint();
+            ret += "(" + this.parameters.expressions.get(0).toPrettyPrint();
             for (int i = 1, count = this.parameters.expressions.size(); i < count; ++i) {
                 ret += ", " + this.parameters.expressions.get(i).toPrettyPrint();
             }

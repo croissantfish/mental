@@ -17,6 +17,7 @@ public class ConstantZero extends DataIntLiteral {
     public String toAddress() {
         return "$zero";
     }
+
     @Override
     public String toRegister() {
         return "$zero";

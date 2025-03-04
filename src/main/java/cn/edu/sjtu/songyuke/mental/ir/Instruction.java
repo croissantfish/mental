@@ -9,6 +9,7 @@ import cn.edu.sjtu.songyuke.mental.translator.MIPSMachine;
 public abstract class Instruction {
     public Instruction nextInstruction = null;
     public IRLabel label = null;
+
     public Instruction() {
         this.nextInstruction = null;
         this.label = null;

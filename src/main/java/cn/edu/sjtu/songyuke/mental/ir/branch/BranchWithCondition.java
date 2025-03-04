@@ -15,7 +15,7 @@ public class BranchWithCondition extends Branch {
         LinkedList<String> mipsInstructions = new LinkedList<>();
 
         if (this.label != null) {
-            mipsInstructions.add(this.label.toString() + ":");
+            mipsInstructions.add(this.label + ":");
         }
         this.condition.refCount--;
         if (this.condition.registerName == -1) {

@@ -12,11 +12,13 @@ public class MemberAccessExpression extends Expression {
     public Expression primaryExpression;
     public Expression memberExpression;
     public String memberName;
+
     public MemberAccessExpression() {
         this.primaryExpression = null;
         this.memberExpression = null;
         this.memberName = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<member access expression>:" + this.returnType + "\n";
@@ -29,6 +31,7 @@ public class MemberAccessExpression extends Expression {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent);

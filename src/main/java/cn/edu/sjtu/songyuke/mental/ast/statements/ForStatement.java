@@ -12,10 +12,12 @@ import java.util.LinkedList;
 public class ForStatement extends Statement {
     public Expression start, cond, loop;
     public Statement loopBody;
+
     public ForStatement() {
         this.start = this.cond = this.loop = null;
         this.loopBody = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = addIndent(indent) + "<for statement>\n";
@@ -35,6 +37,7 @@ public class ForStatement extends Statement {
         ret += addIndent(indent + 1) + "<loop body>\n" + this.loopBody.toPrintString(indent + 2);
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = addIndent(indent) + "for (";
@@ -56,10 +59,12 @@ public class ForStatement extends Statement {
         }
         return ret;
     }
+
     @Override
     public String toString() {
         return "<for loopBody>";
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -70,9 +75,7 @@ public class ForStatement extends Statement {
                 if (this.start.equals(((ForStatement) other).start)) {
                     if (this.cond.equals(((ForStatement) other).cond)) {
                         if (this.loop.equals(((ForStatement) other).loop)) {
-                            if (this.loopBody.equals(((ForStatement) other).loopBody)) {
-                                return true;
-                            }
+                            return this.loopBody.equals(((ForStatement) other).loopBody);
                         }
                     }
                 }

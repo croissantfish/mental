@@ -1,13 +1,13 @@
 package cn.edu.sjtu.songyuke.mental.ast;
 
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalListener;
+import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.ast.declarations.ClassDeclaration;
 import cn.edu.sjtu.songyuke.mental.ast.declarations.FunctionDefinition;
 import cn.edu.sjtu.songyuke.mental.ast.declarations.SingleVariableDeclaration;
 import cn.edu.sjtu.songyuke.mental.ast.declarations.VariableDeclaration;
 import cn.edu.sjtu.songyuke.mental.ast.expressions.*;
 import cn.edu.sjtu.songyuke.mental.ast.statements.*;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalListener;
-import cn.edu.sjtu.songyuke.mental.antlr4.MentalParser;
 import cn.edu.sjtu.songyuke.mental.symbols.*;
 import cn.edu.sjtu.songyuke.mental.type.Array;
 import cn.edu.sjtu.songyuke.mental.type.Class;
@@ -50,7 +50,7 @@ public class BuildTreeListener implements MentalListener {
         } else {
             SymbolFunction functionMain = (SymbolFunction) this.curSymbolTable.getSymbol("main");
             if (functionMain.returnType.equals(SymbolTable.mentalInt)) {
-                if (functionMain.parameterType == null || functionMain.parameterType.size() == 0) {
+                if (functionMain.parameterType == null || functionMain.parameterType.isEmpty()) {
                     return true;
                 }
             }
@@ -181,15 +181,13 @@ public class BuildTreeListener implements MentalListener {
             if (ctx.getChild(i) instanceof MentalParser.EmptyStatementContext) {
                 continue;
             }
-            if (ctx.getChild(i) instanceof MentalParser.DeclarationContext) {
+            if (ctx.getChild(i) instanceof MentalParser.DeclarationContext declarationContext) {
                 // class is declaration.
-                MentalParser.DeclarationContext declarationContext = (MentalParser.DeclarationContext) ctx.getChild(i);
                 if (declarationContext.classDeclaration() != null) {
                     this.curSymbolTable.add(declarationContext.classDeclaration().className().getText(), new SymbolType());
                 }
-            } else if (ctx.getChild(i) instanceof MentalParser.DefinitionContext) {
+            } else if (ctx.getChild(i) instanceof MentalParser.DefinitionContext definitionContext) {
                 // variable and function is definition.
-                MentalParser.DefinitionContext definitionContext = (MentalParser.DefinitionContext) ctx.getChild(i);
                 if (definitionContext.functionDefinition() != null) {
                     // it is a function definition.
                     this.curSymbolTable.add(definitionContext.functionDefinition().functionName.getText(), new SymbolFunction());
@@ -200,8 +198,7 @@ public class BuildTreeListener implements MentalListener {
             if (ctx.getChild(i) instanceof MentalParser.EmptyStatementContext) {
                 continue;
             }
-            if (ctx.getChild(i) instanceof MentalParser.DefinitionContext) {
-                MentalParser.DefinitionContext definitionContext = (MentalParser.DefinitionContext) ctx.getChild(i);
+            if (ctx.getChild(i) instanceof MentalParser.DefinitionContext definitionContext) {
                 if (definitionContext.functionDefinition() != null) {
                     MentalParser.FunctionDefinitionContext functionDefinitionContext = definitionContext.functionDefinition();
                     SymbolFunction symbolFunction = (SymbolFunction) this.curSymbolTable.getSymbol(functionDefinitionContext.functionName.getText());
@@ -212,8 +209,7 @@ public class BuildTreeListener implements MentalListener {
                         this.existError = true;
                     }
                 }
-            } else if (ctx.getChild(i) instanceof MentalParser.DeclarationContext) {
-                MentalParser.DeclarationContext declarationContext = (MentalParser.DeclarationContext) ctx.getChild(i);
+            } else if (ctx.getChild(i) instanceof MentalParser.DeclarationContext declarationContext) {
                 if (declarationContext.classDeclaration() != null) {
                     MentalParser.ClassDeclarationContext classDeclaration = declarationContext.classDeclaration();
                     if (classDeclaration.className() != null) {
@@ -363,7 +359,7 @@ public class BuildTreeListener implements MentalListener {
 
     @Override
     public void exitSingleVariable(MentalParser.SingleVariableContext ctx) {
-        /**
+        /*
          * this function mainly process the initializing expression of a variable.
          */
         if (ctx.parent != null && ctx.parent.parent instanceof MentalParser.ClassDeclarationContext) {
@@ -383,7 +379,7 @@ public class BuildTreeListener implements MentalListener {
         }
         if (!singleVariableDeclaration.variable.variableType.equals(singleVariableDeclaration.initializeExpression.returnType)) {
             System.err.println("fatal: The types of variable and initial value are different.\n\t"
-                    + "<var>" + singleVariableDeclaration.variable.variableType.toString()
+                    + "<var>" + singleVariableDeclaration.variable.variableType
                     + "<initial value>" + singleVariableDeclaration.initializeExpression.returnType
             );
             this.existError = true;
@@ -737,14 +733,16 @@ public class BuildTreeListener implements MentalListener {
                     return;
                 } else {
                     System.err.println("fatal: return a wrong cn.edu.sjtu.songyuke.mental.type value.\n"
-                            + "\texpected " + functionDefinition.functionHead.returnType.toString()
+                            + "\texpected " + functionDefinition.functionHead.returnType
                             + "\n\toccurs " + thisStatement.returnExpression.returnType.toString()
                     );
                     this.existError = true;
                 }
             }
         }
-        System.err.println("fatal: a illegal jump statement.\n\t" + ctx.getText());
+        if (ctx != null) {
+            System.err.println("fatal: a illegal jump statement.\n\t" + ctx.getText());
+        }
         this.existError = true;
     }
 
@@ -816,7 +814,7 @@ public class BuildTreeListener implements MentalListener {
                     thisExpression.memberExpression = new CallLength();
                     thisExpression.memberExpression.parent = thisExpression;
                     thisExpression.returnType = SymbolTable.mentalInt;
-                    if (functionCall.parameters.expressions.size() != 0) {
+                    if (!functionCall.parameters.expressions.isEmpty()) {
                         System.err.println("fatal: the number of parameters of string.length is wrong.\n\t" + ctx.functionCall().getText());
                         this.existError = true;
                     }
@@ -856,7 +854,7 @@ public class BuildTreeListener implements MentalListener {
                     thisExpression.memberExpression.parent = thisExpression;
                     thisExpression.returnType = SymbolTable.mentalInt;
                     if (functionCall.parameters.expressions.size() == 1) {
-                        ((CallOrd) thisExpression.memberExpression).childExpression = functionCall.parameters.expressions.get(0);
+                        ((CallOrd) thisExpression.memberExpression).childExpression = functionCall.parameters.expressions.getFirst();
                         if (!((CallOrd) thisExpression.memberExpression).childExpression.returnType.equals(SymbolTable.mentalInt)) {
                             System.err.println("fatal: the cn.edu.sjtu.songyuke.mental.type of the parameter of string.ord is not int.\n\t" + ctx.functionCall().getText());
                         }
@@ -874,7 +872,7 @@ public class BuildTreeListener implements MentalListener {
                     thisExpression.memberExpression = new CallParseInt();
                     thisExpression.memberExpression.parent = thisExpression;
                     thisExpression.returnType = SymbolTable.mentalInt;
-                    if (functionCall.parameters.expressions.size() != 0) {
+                    if (!functionCall.parameters.expressions.isEmpty()) {
                         System.err.println("fatal: the number of parameters of string.parseInt is wrong.\n\t" + ctx.functionCall().getText());
                         this.existError = true;
                     }
@@ -888,7 +886,7 @@ public class BuildTreeListener implements MentalListener {
                     thisExpression.memberExpression = new CallSize();
                     thisExpression.memberExpression.parent = thisExpression;
                     thisExpression.returnType = SymbolTable.mentalInt;
-                    if (functionCall.parameters.expressions.size() != 0) {
+                    if (!functionCall.parameters.expressions.isEmpty()) {
                         System.err.println("fatal: the number of parameters of array.size is wrong.\n\t" + ctx.functionCall().getText());
                         this.existError = true;
                     }
@@ -901,9 +899,8 @@ public class BuildTreeListener implements MentalListener {
             // it is a member access.
             thisExpression.memberExpression = null;
             thisExpression.memberName = ctx.Identifier().getText();
-            if (thisExpression.primaryExpression.returnType instanceof Class) {
+            if (thisExpression.primaryExpression.returnType instanceof Class thisClass) {
                 // the primary expression is not a class.
-                Class thisClass = (Class) thisExpression.primaryExpression.returnType;
                 if (thisClass.classComponents.get(thisExpression.memberName) != null) {
                     thisExpression.leftValue = thisExpression.primaryExpression.leftValue;
                     thisExpression.returnType = thisClass.classComponents.get(thisExpression.memberName).memberType;
@@ -971,71 +968,77 @@ public class BuildTreeListener implements MentalListener {
                 || functionName.equals("toString")) {
             // it is an internal function call
             //     and the node of this function call will be replaced by an internal function call node.
-            if (functionName.equals("print")) {
-                // may be print(str)
-                if (thisCall.parameters.expressions.size() == 1) {
-                    if (thisCall.parameters.expressions.get(0).returnType.equals(SymbolTable.MENTAL_M_STRING)) {
-                        CallPrint callPrint = new CallPrint();
-                        callPrint.parameter = thisCall.parameters.expressions.get(0);
-                        callPrint.parameter.parent = callPrint;
-                        this.tree.replace(ctx, callPrint);
+            switch (functionName) {
+                case "print" -> {
+                    // may be print(str)
+                    if (thisCall.parameters.expressions.size() == 1) {
+                        if (thisCall.parameters.expressions.getFirst().returnType.equals(SymbolTable.MENTAL_M_STRING)) {
+                            CallPrint callPrint = new CallPrint();
+                            callPrint.parameter = thisCall.parameters.expressions.getFirst();
+                            callPrint.parameter.parent = callPrint;
+                            this.tree.replace(ctx, callPrint);
+                        } else {
+                            System.err.println("fatal: print only accept string as parameter.\n\t" + ctx.getText());
+                            this.existError = true;
+                        }
                     } else {
-                        System.err.println("fatal: print only accept string as parameter.\n\t" + ctx.getText());
+                        System.err.println("fatal: the number of parameters of print(str) is wrong.\n\t" + ctx.getText());
                         this.existError = true;
                     }
-                } else {
-                    System.err.println("fatal: the number of parameters of print(str) is wrong.\n\t" + ctx.getText());
-                    this.existError = true;
                 }
-            } else if (functionName.equals("println")) {
-                // may be println(str)
-                if (thisCall.parameters.expressions.size() == 1) {
-                    if (thisCall.parameters.expressions.get(0).returnType.equals(SymbolTable.MENTAL_M_STRING)) {
-                        CallPrintln callPrintln = new CallPrintln();
-                        callPrintln.parameter = thisCall.parameters.expressions.get(0);
-                        callPrintln.parameter.parent = callPrintln;
-                        this.tree.replace(ctx, callPrintln);
+                case "println" -> {
+                    // may be println(str)
+                    if (thisCall.parameters.expressions.size() == 1) {
+                        if (thisCall.parameters.expressions.getFirst().returnType.equals(SymbolTable.MENTAL_M_STRING)) {
+                            CallPrintln callPrintln = new CallPrintln();
+                            callPrintln.parameter = thisCall.parameters.expressions.getFirst();
+                            callPrintln.parameter.parent = callPrintln;
+                            this.tree.replace(ctx, callPrintln);
+                        } else {
+                            System.err.println("fatal: println only accept string as parameter.\n\t" + ctx.getText());
+                            this.existError = true;
+                        }
                     } else {
-                        System.err.println("fatal: println only accept string as parameter.\n\t" + ctx.getText());
+                        System.err.println("fatal: the number of parameters of println(str) is wrong.\n\t" + ctx.getText());
                         this.existError = true;
                     }
-                } else {
-                    System.err.println("fatal: the number of parameters of println(str) is wrong.\n\t" + ctx.getText());
-                    this.existError = true;
                 }
-            } else if (functionName.equals("getInt")) {
-                // may be getInt()
-                if (thisCall.parameters.expressions.isEmpty()) {
-                    CallGetInt callGetInt = new CallGetInt();
-                    this.tree.replace(ctx, callGetInt);
-                } else {
-                    System.err.println("fatal: getInt() accepts no parameter.\n\t" + ctx.getText());
-                    this.existError = true;
-                }
-            } else if (functionName.equals("getString")) {
-                // may be getString()
-                if (thisCall.parameters.expressions.isEmpty()) {
-                    CallGetString callGetString = new CallGetString();
-                    this.tree.replace(ctx, callGetString);
-                } else {
-                    System.err.println("fatal: getString() accepts no parameter.\n\t" + ctx.getText());
-                    this.existError = true;
-                }
-            } else if (functionName.equals("toString")) {
-                // may be toString(int)
-                if (thisCall.parameters.expressions.size() == 1) {
-                    if (thisCall.parameters.expressions.getFirst().returnType.equals(SymbolTable.mentalInt)) {
-                        CallToString callToString = new CallToString();
-                        callToString.childExpression = thisCall.parameters.expressions.getFirst();
-                        callToString.childExpression.parent = callToString;
-                        this.tree.replace(ctx, callToString);
+                case "getInt" -> {
+                    // may be getInt()
+                    if (thisCall.parameters.expressions.isEmpty()) {
+                        CallGetInt callGetInt = new CallGetInt();
+                        this.tree.replace(ctx, callGetInt);
                     } else {
-                        System.err.println("fatal: toString only accepts int as parameter.\n\t" + ctx.getText());
+                        System.err.println("fatal: getInt() accepts no parameter.\n\t" + ctx.getText());
                         this.existError = true;
                     }
-                } else {
-                    System.err.println("fatal: the number of parameters of toString(int) is wrong.\n\t" + ctx.getText());
-                    this.existError = true;
+                }
+                case "getString" -> {
+                    // may be getString()
+                    if (thisCall.parameters.expressions.isEmpty()) {
+                        CallGetString callGetString = new CallGetString();
+                        this.tree.replace(ctx, callGetString);
+                    } else {
+                        System.err.println("fatal: getString() accepts no parameter.\n\t" + ctx.getText());
+                        this.existError = true;
+                    }
+                }
+                case "toString" -> {
+                    // may be toString(int)
+                    if (thisCall.parameters.expressions.size() == 1) {
+                        if (thisCall.parameters.expressions.getFirst().returnType.equals(SymbolTable.mentalInt)) {
+                            CallToString callToString = new CallToString();
+                            callToString.childExpression = thisCall.parameters.expressions.getFirst();
+                            callToString.childExpression.parent = callToString;
+                            this.tree.replace(ctx, callToString);
+                        } else {
+                            System.err.println("fatal: toString only accepts int as parameter.\n\t" + ctx.getText());
+                            this.existError = true;
+                        }
+                    } else {
+                        System.err.println("fatal: the number of parameters of toString(int) is wrong.\n\t" + ctx.getText());
+                        this.existError = true;
+                    }
                 }
             }
             return;
@@ -1048,7 +1051,7 @@ public class BuildTreeListener implements MentalListener {
             if (thisCall.functionHead.parameterType.size() == thisCall.parameters.expressions.size()) {
                 for (int i = 0, count = thisCall.functionHead.parameterType.size(); i < count; ++i) {
                     if (!thisCall.functionHead.parameterType.get(i).equals(thisCall.parameters.expressions.get(i).returnType)) {
-                        System.err.println("fatal: the cn.edu.sjtu.songyuke.mental.type of " + Integer.toString(i) + "-th parameter mismatched. "
+                        System.err.println("fatal: the cn.edu.sjtu.songyuke.mental.type of " + i + "-th parameter mismatched. "
                                 + "\n\t expected " + thisCall.functionHead.parameterType.get(i).toString()
                                 + "\n\t occurs " + thisCall.parameters.expressions.get(i).returnType.toString()
                         );
@@ -1058,8 +1061,8 @@ public class BuildTreeListener implements MentalListener {
             } else {
                 System.err.println("fatal: the function call of `" + functionName
                         + "` has a wrong number of parameters.\n"
-                        + "\t expected " + Integer.toString(thisCall.functionHead.parameterType.size())
-                        + "\n\t occurs " + Integer.toString(thisCall.parameters.expressions.size())
+                        + "\t expected " + thisCall.functionHead.parameterType.size()
+                        + "\n\t occurs " + thisCall.parameters.expressions.size()
                         + "\n\t\t with context: " + ctx.getText()
                 );
                 this.existError = true;
@@ -1107,8 +1110,8 @@ public class BuildTreeListener implements MentalListener {
     public void enterCREATION_EXPRESSION(MentalParser.CREATION_EXPRESSIONContext ctx) {
         CreationExpression creationExpression = new CreationExpression();
         SymbolType type = (SymbolType) this.curSymbolTable.getSymbol(ctx.typeName().getText());
-        if ((ctx.expression() == null || ctx.expression().size() == 0)
-                && (ctx.array() == null || ctx.array().size() == 0)) {
+        if ((ctx.expression() == null || ctx.expression().isEmpty())
+                && (ctx.array() == null || ctx.array().isEmpty())) {
             creationExpression.returnType = type.type;
             creationExpression.baseType = type.type;
             creationExpression.expressionList = null;
@@ -1286,7 +1289,7 @@ public class BuildTreeListener implements MentalListener {
                                 StringLiteral replaceNode = new StringLiteral();
                                 replaceNode.literalContext =
                                         ((StringLiteral) thisExpression.leftExpression).literalContext.substring(0, ((StringLiteral) thisExpression.leftExpression).literalContext.length() - 1)
-                                                + ((StringLiteral) thisExpression.rightExpression).literalContext.substring(1, ((StringLiteral) thisExpression.rightExpression).literalContext.length());
+                                                + ((StringLiteral) thisExpression.rightExpression).literalContext.substring(1);
                                 this.tree.replace(ctx, replaceNode);
                             }
                         }

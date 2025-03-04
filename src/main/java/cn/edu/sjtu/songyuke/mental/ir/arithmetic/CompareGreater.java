@@ -11,16 +11,20 @@ public class CompareGreater extends Compare {
     public CompareGreater() {
         super();
     }
+
     public CompareGreater(DataValue lhs, DataValue rhs) {
         super(lhs, rhs);
     }
+
     public CompareGreater(Data lhs, Data rhs, DataValue res) {
         super(lhs, rhs, res);
     }
+
     @Override
     public String toMips(MIPSMachine mipsMachine) {
         return this.toMips(mipsMachine, "sgt");
     }
+
     @Override
     public String toMips() {
         return this.toMips("sgt");

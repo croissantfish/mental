@@ -8,12 +8,11 @@ public class MxString extends TypeBase {
     public String toString() {
         return "string";
     }
+
     @Override
     public boolean equals(Object other) {
         if (other != null) {
-            if (other instanceof MxString) {
-                return true;
-            }
+            return other instanceof MxString;
         }
         return false;
     }

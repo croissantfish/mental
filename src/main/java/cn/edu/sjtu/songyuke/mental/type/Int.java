@@ -8,6 +8,7 @@ public class Int extends TypeBase {
     public String toString() {
         return "int";
     }
+
     @Override
     public boolean equals(Object other) {
         return other != null && other instanceof Int;

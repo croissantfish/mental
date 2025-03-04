@@ -16,10 +16,12 @@ public class JumpStatement extends Statement {
     public static final int BREAK = 3000;
     public int variant;
     public Expression returnExpression;
+
     public JumpStatement() {
         this.variant = 0;
         this.returnExpression = null;
     }
+
     @Override
     public String toPrintString(int indent) {
         String ret = "";
@@ -32,6 +34,7 @@ public class JumpStatement extends Statement {
         }
         return ret;
     }
+
     @Override
     public String toPrettyPrint(int indent) {
         String ret = "";
